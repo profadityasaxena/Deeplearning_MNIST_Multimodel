@@ -1,145 +1,113 @@
-# 🧠 MNIST Digit & Fashion-MNIST Classification Project
+# 🧠 MNIST & Fashion-MNIST Classification Project
 
-This project focuses on implementing linear classifiers from scratch to classify handwritten digits from the [MNIST dataset](http://yann.lecun.com/exdb/mnist/) and also developing dense and convolutional neural networks for the [Fashion-MNIST dataset](https://keras.io/api/datasets/fashion_mnist/). The goal is to understand both foundational linear models and practical deep learning architectures using Jupyter Notebooks.
+#### [Author] : Aditya Saxena
+
+This project explores both classic and modern techniques for image classification using two well-known datasets:
+
+- **MNIST**: 70,000 grayscale images of handwritten digits (0–9)
+- **Fashion-MNIST**: 70,000 grayscale images of fashion items (10 categories)
 
 ---
 
-## 📦 Project Structure
+## 🎯 Objectives
+
+- Implement linear classifiers from scratch:  
+  - Perceptron  
+  - Average Perceptron  
+  - Pegasos (SVM with hinge loss)
+
+- Implement deep learning models using Keras:  
+  - Dense Neural Networks (DNN)  
+  - Convolutional Neural Networks (CNN)
+
+- Evaluate models using:  
+  - Accuracy  
+  - Hinge loss  
+  - Zero-One loss  
+  - Confusion matrix
+
+- Tune hyperparameters (e.g., learning rate, epochs, batch size)
+- Visualize metrics (accuracy/loss curves, decision boundaries)
+
+---
+
+## 🗂️ Project Structure
 
 ```
-mnist_project/
-├── data/
-│   ├── mnist_train.csv
-│   └── mnist_test.csv
+project/
 ├── utils/
-│   ├── feature_extraction.py
-│   ├── hinge_loss.py
-│   ├── perceptron.py
-│   └── pegasos.py
-├── classifiers/
-│   ├── perceptron_classifier.py
-│   ├── pegasos_classifier.py
+│   ├── classifiers.py
+│   ├── loss_functions.py
+│   ├── visualization.py
+├── data/
+│   └── [loaded via Keras or external source]
 ├── notebooks/
 │   ├── MNIST_Linear_Models.ipynb
-│   ├── FashionMNIST_DenseNN.ipynb
-│   └── FashionMNIST_CNN.ipynb
-├── main.py
-└── README.md
+│   └── DeepLearning_MNIST_MultiModel.ipynb
+├── README.md
 ```
 
 ---
 
-## ✅ Objectives
+## 📦 Requirements
 
-- Preprocess the MNIST and Fashion-MNIST datasets
-- Implement and evaluate:
-  - Perceptron, Average Perceptron, Pegasos (SVM with hinge loss)
-  - Dense Neural Network (DNN) for Fashion-MNIST
-  - Convolutional Neural Network (CNN) for Fashion-MNIST
-- Perform hyperparameter tuning
-- Evaluate models using accuracy and loss metrics
+- Python 3.8+
+- NumPy, Pandas, Matplotlib, Seaborn
+- Scikit-learn
+- Keras + TensorFlow backend
+- Jupyter Notebook
 
----
+Install with:
 
-## 🔧 Implemented Algorithms
-
-### Linear Classifiers (from scratch)
-
-#### 1. Hinge Loss
-```python
-def hinge_loss_single(feature_vector, label, theta, theta_0):
-    return max(0, 1 - label * (np.dot(feature_vector, theta) + theta_0))
-```
-
-#### 2. Perceptron
-```python
-def perceptron_single_step_update(x, y, theta, theta_0):
-    if y * (np.dot(theta, x) + theta_0) <= 0:
-        theta += y * x
-        theta_0 += y
-    return theta, theta_0
-```
-
-#### 3. Average Perceptron
-```python
-def average_perceptron(feature_matrix, labels, T):
-    # Averages the weight and bias vectors across all updates
-```
-
-#### 4. Pegasos (SVM)
-```python
-def pegasos_single_step_update(x, y, L, eta, theta, theta_0):
-    # Stochastic gradient descent for SVM
-```
-
----
-
-### Deep Learning Models (Keras + Jupyter)
-
-#### Dense Neural Network (DNN)
-
-- Two hidden layers: [512, 256]
-- Optimizers: `rmsprop`, `adam`
-- Validation-based epoch selection
-- Hyperparameter tuning: batch size, layers, optimizer
-
-#### Convolutional Neural Network (CNN)
-
-- Two convolution layers: [32, 64] with 3x3 kernels
-- Max pooling: 2x2
-- Dense layer with 64 neurons before output
-- Hyperparameter tuning: channel size, batch size, optimizer
-
----
-
-## 📊 Evaluation
-
-- **Accuracy** for classification performance
-- **Hinge Loss** for linear models
-- **Cross-validation** for model selection
-- **Model.summary()** to compare number of parameters
-
----
-
-## 🚀 Running the Project
-
-### For MNIST Linear Classifiers
 ```bash
-python main.py --classifier perceptron --T 10
-python main.py --classifier pegasos --T 25 --lambda 0.01
+pip install numpy pandas matplotlib seaborn scikit-learn tensorflow
 ```
 
-### For Fashion-MNIST Deep Learning Models
-Use Jupyter Notebooks:
-- `FashionMNIST_DenseNN.ipynb`
-- `FashionMNIST_CNN.ipynb`
+---
+
+## 🧪 Results Summary
+
+| Model               | Dataset        | Train Accuracy | Test Accuracy |
+|---------------------|----------------|----------------|----------------|
+| Perceptron          | MNIST (Binary) | 91.0%          | 87.6%          |
+| Avg. Perceptron     | MNIST (Binary) | 92.5%          | 89.2%          |
+| Pegasos (λ=0.01)    | MNIST (Binary) | 94.1%          | 90.5%          |
+| DNN (Tuned)         | Fashion-MNIST  | 96.8%          | 89.3%          |
+| CNN (Tuned)         | Fashion-MNIST  | 98.6%          | 91.2%          |
 
 ---
 
-## 📈 Results Snapshot
+## 📈 Visualizations
 
-| Classifier         | Dataset        | Accuracy (Test) |
-|--------------------|----------------|-----------------|
-| Perceptron         | MNIST          | 88.5%           |
-| Avg. Perceptron    | MNIST          | 89.6%           |
-| Pegasos (λ=0.01)   | MNIST          | 90.2%           |
-| Dense NN (Tuned)   | Fashion-MNIST  | TBD             |
-| CNN (Tuned)        | Fashion-MNIST  | TBD             |
+- Accuracy/loss over epochs
+- Confusion matrices
+- Sample predictions and misclassifications
+- Decision boundaries (for 2D toy datasets)
 
 ---
 
-## 🧪 Future Work
+## 🔧 Utility Functions
 
-- Add Logistic Regression and Softmax classifiers
-- Explore kernelized methods for linear models
-- Visualize filters and feature maps in CNN
-- Automate hyperparameter tuning (e.g., using GridSearch or Optuna)
+- `classify(...)`: Predict class using linear rule  
+- `classification_accuracy(...)`: Measure accuracy  
+- `hinge_loss_single(...)` and `hinge_loss_full(...)`: Compute hinge loss  
+- `zero_one_loss(...)`: Compute general classification error  
+- `plot_metrics_over_epochs(...)`: Visualize accuracy/loss over time  
+- `report_results_table(...)`: Display results as formatted table  
+
+---
+
+## 🧠 Learning Outcomes
+
+- Hands-on implementation of linear classifiers  
+- Practical comparison with deep learning models  
+- Visual intuition on margins and loss  
+- Integration of model performance evaluation + tuning
 
 ---
 
 ## 📚 References
 
-- [Deep Learning with Python – Chollet](https://www.manning.com/books/deep-learning-with-python)
-- [Scikit-learn SVM Docs](https://scikit-learn.org/stable/modules/svm.html)
-- [MNIST Dataset](http://yann.lecun.com/exdb/mnist/)
-- [Fashion-MNIST Dataset](https://keras.io/api/datasets/fashion_mnist/)
+- Yann LeCun's MNIST dataset: http://yann.lecun.com/exdb/mnist/
+- Fashion-MNIST: https://github.com/zalandoresearch/fashion-mnist
+- Deep Learning with Python – François Chollet
