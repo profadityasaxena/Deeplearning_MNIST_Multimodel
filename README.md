@@ -34,17 +34,11 @@ This project explores both classic and modern techniques for image classificatio
 ## 🗂️ Project Structure
 
 ```
-project/
-├── utils/
-│   ├── classifiers.py
-│   ├── loss_functions.py
-│   ├── visualization.py
-├── data/
-│   └── [loaded via Keras or external source]
-├── notebooks/
-│   ├── MNIST_Linear_Models.ipynb
-│   └── DeepLearning_MNIST_MultiModel.ipynb
-├── README.md
+DeepLearning_MNIST_Multimodel/
+└── Project/
+    ├── DeepLearning_MNIST_LinearModel.ipynb                # Linear classifiers: Perceptron, Pegasos, Avg. Perceptron
+    ├── DeepLearning_MNIST_DeepLearningAdvancedModel.ipynb  # DNN and CNN models using Keras
+    └── README.md                                           # Project documentation
 ```
 
 ---
